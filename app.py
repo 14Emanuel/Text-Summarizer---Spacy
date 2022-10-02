@@ -18,8 +18,9 @@ def home():
 @app.route('/predict', methods = ['POST'])
 
 def predict():
-    document =request.form["z1"]  #fetching text from html form
-    
+    document =request.form["content"]  #fetching text from html form
+    num = request.form["sentences"]  #fetching text from html form
+    print(num)
     #Load English into Spacy
     nlp = spacy.load("en_core_web_sm")
     document = nlp(document)
@@ -54,7 +55,7 @@ def predict():
                     sent_strength[sent]=freq_word[word.text]
   
     #Summarizing sentences
-    summarized_sentences = nlargest(4, sent_strength, key=sent_strength.get)
+    summarized_sentences = nlargest(int(num) if num else 4, sent_strength, key=sent_strength.get)
      
     #final sentence
     final_sentences= [w.text for w in summarized_sentences]
@@ -66,4 +67,4 @@ def predict():
 
 #Run app
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
