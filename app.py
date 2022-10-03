@@ -12,7 +12,12 @@ app = Flask(__name__, template_folder = 'template')
 #create our "home" route using the "housingprice.html" page
 @app.route('/')
 def home():
-    return render_template('input.html')
+    
+    context={
+        'sentences': 5, 
+        'summary':2,
+    }
+    return render_template('base.html',context=context)
 
 #Set a post method to yield predictions on page
 @app.route('/predict', methods = ['POST'])
@@ -20,7 +25,6 @@ def home():
 def predict():
     document =request.form["content"]  #fetching text from html form
     num = request.form["sentences"]  #fetching text from html form
-    print(num)
     #Load English into Spacy
     nlp = spacy.load("en_core_web_sm")
     document = nlp(document)
@@ -62,7 +66,7 @@ def predict():
     summary= ''.join(final_sentences)
     
     # return summary
-    return render_template('output.html', summary=summary)
+    return summary
     # print(summarise(text))
 
 #Run app
