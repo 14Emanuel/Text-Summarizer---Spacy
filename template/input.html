@@ -13,6 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;700&family=Roboto+Mono&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 
+
 </head>
 <body>
 
@@ -25,8 +26,10 @@
         <br><br>
         <form action='/predict' method="post">                    
             <div class="input">
-                <textarea class='input-text' id="tutorial" name="z1" rows="20" cols="70" ></textarea><br>
-                <button class="button" type="Summarize" >Summarize</button>
+                <textarea class='input-text' id="tutorial" name="content" rows="20" cols="70" ></textarea><br>
+                <label for="sentences">Sentences</label>
+                    <input type="number" name="sentences" id="sentences">               
+                <button class="button" type="submit" >Summarize</button>
             </div>
                     
         </form>
